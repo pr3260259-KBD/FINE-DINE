@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FINE DINE Login</title>
+
+<style>
+body {
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f9b0f, #000000);
+}
+
+/* GLASS CARD */
+.box {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(15px);
+  padding:40px;
+  border-radius:15px;
+  text-align:center;
+  width:300px;
+  color:white;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+/* LOGO */
+.logo {
+  font-size:28px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.tagline {
+  font-size:14px;
+  margin-bottom:20px;
+  color:#ddd;
+}
+
+/* INPUT */
+input {
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:none;
+  border-radius:8px;
+  outline:none;
+}
+
+/* BUTTON */
+button {
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:8px;
+  background:#00ff88;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover {
+  background:#00cc6a;
+}
+
+/* ANIMATION */
+.box {
+  animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <div class="logo">🍽 FINE DINE</div>
+  <div class="tagline">Taste the Luxury</div>
+
+  <input type="text" placeholder="Enter your name" id="name">
+  <input type="tel" placeholder="Enter mobile number" id="phone" maxlength="10">
+
+  <button onclick="login()">Login</button>
+</div>
+
+<script>
+function login(){
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+
+  if(name && phone){
+    localStorage.setItem("user", name);
+    window.location.href = "home.html";
+  } else {
+    alert("Please fill all details");
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FINE DINE - Menu</title>
+
+<style>
+body {
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background:#f2f4f7;
+}
+
+/* HEADER */
+.header {
+  background:linear-gradient(135deg,#0fa34a,#0c7f3a);
+  color:white;
+  padding:12px;
+  text-align:center;
+  font-weight:bold;
+  font-size:18px;
+  letter-spacing:1px;
+}
+
+/* SEARCH */
+.search {
+  padding:10px;
+  background:white;
+  box-shadow:0 2px 5px rgba(0,0,0,0.05);
+}
+.search input {
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  outline:none;
+}
+
+/* CATEGORY */
+.category {
+  font-size:15px;
+  padding:10px;
+  font-weight:600;
+}
+
+/* GRID */
+.menu {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px;
+  padding:10px 10px 80px;
+}
+
+/* CARD */
+.card {
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  text-align:center;
+  font-size:12px;
+  position:relative;
+  transition:0.3s;
+}
+
+.card:hover {
+  transform:translateY(-5px);
+}
+
+/* IMAGE FIX (MAIN FIX) */
+.card img {
+  width:100%;
+  height:110px;
+  object-fit:cover;
+}
+
+/* BADGES */
+.best {
+  position:absolute;
+  top:6px;
+  left:6px;
+  background:orange;
+  color:white;
+  font-size:10px;
+  padding:3px 6px;
+  border-radius:6px;
+}
+
+.heart {
+  position:absolute;
+  top:6px;
+  right:8px;
+  cursor:pointer;
+}
+
+/* TEXT */
+.card h3 {
+  margin:6px 0 2px;
+  font-size:13px;
+}
+
+.price {
+  color:#0fa34a;
+  font-weight:bold;
+  margin:3px 0;
+}
+
+/* BUTTONS */
+.controls button {
+  padding:4px 7px;
+  font-size:11px;
+  margin:3px;
+  border:none;
+  background:#0fa34a;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+/* CART */
+.cart {
+  position:fixed;
+  bottom:15px;
+  right:15px;
+  background:#0fa34a;
+  color:white;
+  padding:12px;
+  border-radius:50%;
+  font-size:18px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.badge {
+  position:absolute;
+  top:-5px;
+  right:-5px;
+  background:red;
+  color:white;
+  font-size:10px;
+  padding:3px 6px;
+  border-radius:50%;
+}
+
+/* TOTAL */
+.total-box {
+  position:fixed;
+  bottom:70px;
+  right:15px;
+  background:white;
+  padding:10px;
+  border-radius:10px;
+  font-size:13px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}</style>
+</head>
+
+<body>
+
+<div class="header">🍽 FINE DINE Menu</div>
+
+<div class="search">
+<input type="text" placeholder="Search food..." onkeyup="searchFood(this.value)">
+</div>
+
+<!-- FAST FOOD -->
+<div class="category">🍔 Fast Food</div>
+<div class="menu">
+
+<div class="card" data-name="pizza">
+<div class="best">BEST</div>
+<span class="heart" onclick="like(this)">❤️</span>
+<img src="images/pizza.JPEG">
+<h3>Pizza</h3>
+<div>⭐ 4.5</div>
+<select id="pizza-size">
+<option value="1">S</option>
+<option value="1.3">M</option>
+<option value="1.6">L</option>
+</select>
+<div class="price">₹200</div>
+<div class="controls">
+<button onclick="change('pizza',-1)">-</button>
+<span id="pizza">0</span>
+<button onclick="change('pizza',1)">+</button>
+</div>
+</div>
+
+<div class="card" data-name="burger">
+<span class="heart" onclick="like(this)">❤️</span>
+<img src="images/burger.JPEG">
+<h3>Burger</h3>
+<div>⭐ 4.3</div>
+<div class="price">₹120</div>
+<div class="controls">
+<button onclick="change('burger',-1)">-</button>
+<span id="burger">0</span>
+<button onclick="change('burger',1)">+</button>
+</div>
+</div>
+
+<div class="card" data-name="momos">
+<img src="images/momos.JPEG">
+<h3>Momos</h3>
+<div>⭐ 4.4</div>
+<div class="price">₹90</div>
+<div class="controls">
+<button onclick="change('momos',-1)">-</button>
+<span id="momos">0</span>
+<button onclick="change('momos',1)">+</button>
+</div>
+</div>
+
+<div class="card" data-name="sandwich">
+<img src="images/sandwich.JPEG">
+<h3>Sandwich</h3>
+<div>⭐ 4.3</div>
+<div class="price">₹100</div>
+<div class="controls">
+<button onclick="change('sandwich',-1)">-</button>
+<span id="sandwich">0</span>
+<button onclick="change('sandwich',1)">+</button>
+</div>
+</div>
+
+</div>
+
+<!-- DRINKS -->
+<div class="category">🥤 Drinks</div>
+<div class="menu">
+
+<div class="card" data-name="pepsi">
+<img src="images/pepsi.JPEG">
+<h3>Pepsi</h3>
+<div class="price">₹40</div>
+<div class="controls">
+<button onclick="change('pepsi',-1)">-</button>
+<span id="pepsi">0</span>
+<button onclick="change('pepsi',1)">+</button>
+</div>
+</div>
+
+<div class="card" data-name="dew">
+<img src="images/mountain-dew.JPEG">
+<h3>Mountain Dew</h3>
+<div class="price">₹45</div>
+<div class="controls">
+<button onclick="change('dew',-1)">-</button>
+<span id="dew">0</span>
+<button onclick="change('dew',1)">+</button>
+</div>
+</div>
+
+</div>
+
+<!-- THALI -->
+<div class="category">🍛 Thali</div>
+<div class="menu">
+
+<div class="card" data-name="vegthali">
+<img src="images/veg-thali.JPEG">
+<h3>Veg Thali</h3>
+<div class="price">₹180</div>
+<div class="controls">
+<button onclick="change('vegthali',-1)">-</button>
+<span id="vegthali">0</span>
+<button onclick="change('vegthali',1)">+</button>
+</div>
+</div>
+
+<div class="card" data-name="chickenthali">
+<img src="images/chicken-thali.JPEG">
+<h3>Chicken Thali</h3>
+<div class="price">₹280</div>
+<div class="controls">
+<button onclick="change('chickenthali',-1)">-</button>
+<span id="chickenthali">0</span>
+<button onclick="change('chickenthali',1)">+</button>
+</div>
+</div>
+
+</div>
+
+<!-- TOTAL -->
+<div class="total-box">
+Total: ₹<span id="total">0</span>
+</div>
+
+<!-- CART -->
+<div class="cart">
+🛒 <span class="badge" id="count">0</span>
+</div>
+
+<script>
+
+let prices = {
+pizza:200,
+burger:120,
+momos:90,
+sandwich:100,
+pepsi:40,
+dew:45,
+vegthali:180,
+chickenthali:280
+};
+
+let totalItems = 0;
+
+function change(id,val){
+let el = document.getElementById(id);
+let n = parseInt(el.innerText) + val;
+
+if(n>=0){
+el.innerText = n;
+
+totalItems += val;
+if(totalItems < 0) totalItems = 0;
+
+document.getElementById("count").innerText = totalItems;
+updateTotal();
+}
+}
+
+// ✅ ORDER FUNCTION (separate)
+function order(){
+let cart = {};
+
+for(let item in prices){
+let qty = parseInt(document.getElementById(item).innerText);
+
+if(qty > 0){
+cart[item] = {
+qty: qty,
+price: prices[item]
+};
+}
+}
+
+if(Object.keys(cart).length === 0){
+alert("Please select at least 1 item");
+return;
+}
+
+localStorage.setItem("cart", JSON.stringify(cart));
+window.location.href = "order.html";
+}
+
+// ✅ TOTAL
+function updateTotal(){
+let total = 0;
+
+for(let item in prices){
+let qty = parseInt(document.getElementById(item).innerText);
+total += qty * prices[item];
+}
+
+document.getElementById("total").innerText = total;
+}
+
+// ❤️ LIKE
+function like(el){
+el.style.color = el.style.color === "red" ? "black" : "red";
+}
+
+// 🔍 SEARCH
+function searchFood(value){
+let cards = document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+let name = card.getAttribute("data-name");
+
+if(name.includes(value.toLowerCase())){
+card.style.display = "block";
+} else {
+card.style.display = "none";
+}
+});
+}
+
+</script>
+
+<button onclick="order()" style="
+position:fixed;
+bottom:15px;
+left:15px;
+padding:12px 18px;
+background:#ff5722;
+color:white;
+border:none;
+border-radius:10px;
+font-weight:bold;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+cursor:pointer;">
+🚀 Place Order
+</button>
+
+</body>
+</html>

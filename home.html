@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FINE DINE</title>
+
+<style>
+body {
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+}
+
+/* HERO WITH IMAGE */
+.hero {
+  height:100vh;
+  background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836') no-repeat center/cover;
+  position:relative;
+  color:white;
+}
+
+/* DARK OVERLAY */
+.overlay {
+  background: rgba(0,0,0,0.6);
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+/* NAVBAR */
+.nav {
+  position:absolute;
+  top:0;
+  width:100%;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  color:white;
+}
+
+/* TEXT */
+h1 {
+  font-size:40px;
+}
+
+p {
+  font-size:18px;
+}
+
+/* BUTTON */
+button {
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:#00ff88;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:15px;
+}
+
+/* FEATURES */
+.features {
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  padding:40px;
+  background:#f5f5f5;
+}
+
+.card {
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  width:200px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+
+  <div class="nav">
+    <h2>🍽 FINE DINE</h2>
+    <span id="user"></span>
+  </div>
+
+  <div class="overlay">
+    <h1>Delicious Food Delivered Fast</h1>
+    <p>Fresh • Hygienic • Affordable</p>
+    <button onclick="goMenu()">Order Now</button>
+  </div>
+
+</div>
+
+<!-- FEATURES -->
+<div class="features">
+
+  <div class="card">
+    🍃 <h3>Fresh Food</h3>
+    <p>Prepared daily</p>
+  </div>
+
+  <div class="card">
+    🧼 <h3>Hygienic</h3>
+    <p>Clean kitchen</p>
+  </div>
+
+  <div class="card">
+    💰 <h3>Affordable</h3>
+    <p>Best prices</p>
+  </div>
+
+</div>
+
+<script>
+document.getElementById("user").innerText =
+  "Hi, " + (localStorage.getItem("user") || "Guest");
+
+function goMenu(){
+  window.location.href = "menu.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FINE DINE - Order</title>
+
+<style>
+body {
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background:linear-gradient(135deg,#0fa34a,#0c7a38);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+/* CARD */
+.container {
+  background:white;
+  width:350px;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+/* TITLE */
+h2 {
+  text-align:center;
+  margin-bottom:15px;
+}
+
+/* ITEM */
+.item {
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  border-bottom:1px solid #eee;
+}
+
+/* TOTAL */
+.total {
+  font-size:18px;
+  font-weight:bold;
+  margin-top:10px;
+  color:#0fa34a;
+}
+
+/* INPUT */
+input {
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+/* BUTTON */
+button {
+  width:100%;
+  padding:12px;
+  margin-top:15px;
+  background:#0fa34a;
+  color:white;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover {
+  background:#0c7a38;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🛒 Your Order</h2>
+
+<div id="items"></div>
+
+<div class="total" id="total"></div>
+
+<h3>📍 Delivery Location</h3>
+<input type="text" id="address" placeholder="Enter your address">
+
+<button onclick="confirmOrder()">Confirm Order</button>
+
+</div>
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
+let total = 0;
+
+for(let item in cart){
+let cost = cart[item].qty * cart[item].price;
+total += cost;
+
+document.getElementById("items").innerHTML += `
+<div class="item">
+<span>${item} x ${cart[item].qty}</span>
+<span>₹${cost}</span>
+</div>`;
+}
+
+document.getElementById("total").innerText = "Total: ₹" + total;
+
+// CONFIRM ORDER
+function confirmOrder(){
+let address = document.getElementById("address").value;
+
+if(address){
+localStorage.setItem("address", address);
+window.location.href = "payment.html";
+} else {
+alert("Please enter your location 📍");
+}
+}
+
+</script>
+
+</body>
+</html>

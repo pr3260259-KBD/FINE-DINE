@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Payment - FINE DINE</title>
+
+<style>
+body {
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background:linear-gradient(135deg,#0fa34a,#0c7a38);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.container {
+  background:white;
+  width:350px;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+h2 {
+  text-align:center;
+}
+
+.option {
+  border:1px solid #ddd;
+  padding:10px;
+  border-radius:8px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+.option:hover {
+  background:#f0f0f0;
+}
+
+.selected {
+  border:2px solid #0fa34a;
+  background:#eafff1;
+}
+
+button {
+  width:100%;
+  padding:12px;
+  margin-top:15px;
+  background:#0fa34a;
+  color:white;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>💳 Payment</h2>
+
+<div class="option" onclick="select(this,'COD')">Cash on Delivery</div>
+<div class="option" onclick="select(this,'UPI')">UPI Payment</div>
+<div class="option" onclick="select(this,'CARD')">Debit/Credit Card</div>
+
+<button onclick="payNow()">Pay Now</button>
+
+</div>
+
+<script>
+
+let selectedMethod = "";
+
+// SELECT METHOD
+function select(el, method){
+selectedMethod = method;
+
+let options = document.querySelectorAll(".option");
+options.forEach(o => o.classList.remove("selected"));
+
+el.classList.add("selected");
+}
+
+// PAYMENT
+function payNow(){
+
+if(!selectedMethod){
+alert("Select payment method");
+return;
+}
+
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
+let total = 0;
+
+for(let item in cart){
+total += cart[item].qty * cart[item].price;
+}
+
+let address = localStorage.getItem("address");
+
+alert(
+"🎉 Payment Successful!\n\n" +
+"Method: " + selectedMethod + "\n" +
+"Total: ₹" + total + "\n\n" +
+"Delivering to:\n" + address
+);
+
+localStorage.clear();
+window.location.href = "menu.html";
+}
+
+</script>
+
+</body>
+</html>
